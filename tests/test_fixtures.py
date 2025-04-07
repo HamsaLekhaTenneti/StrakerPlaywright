@@ -1,5 +1,6 @@
 import pytest
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright,TimeoutError 
+
 
 BASE_URL = "https://www.straker.ai"
 DEFAULT_TIMEOUT_MILLISECONDS = 60000
@@ -12,6 +13,9 @@ def launchbrowser():
         context = browser.new_context()
         page = context.new_page()
         # Reference: https://playwright.dev/python/docs/api/class-frame#frame-wait-for-selector
-        page.goto(BASE_URL, wait_until="domcontentloaded")
-        yield page # Before this is @BeforeTest and After this is @AfterTest
+        try:
+          page.goto(BASE_URL, wait_until="domcontentloaded")
+          yield page # Before this is @BeforeTest and After this is @AfterTest
+        except TimeoutError:
+           print("Timeouterror")
         browser.close()

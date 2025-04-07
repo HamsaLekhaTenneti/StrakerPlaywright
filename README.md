@@ -25,3 +25,6 @@ https://playwright.dev/python/docs/test-runners
 # Other notes
 1. Removed networkidle as Playwright docs says its discouraged.
     (Reference: https://playwright.dev/python/docs/api/class-frame#frame-wait-for-selector)
+2. To using networkidle(is taking 13 seconds) is taking time compare to domcontentloaded(is taking only 7 seconds)
+3. To using expections & errors ,here how to use it.
+    (Reference:https://playwright.dev/python/docs/api/class-timeouterror)
