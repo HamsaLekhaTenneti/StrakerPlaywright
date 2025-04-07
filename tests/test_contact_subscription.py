@@ -22,6 +22,9 @@ def test_subscribe_to_updates(launchbrowser: Page):
     expect(subscribe).to_be_visible(timeout=DEFAULT_TIMEOUT_MILLISECONDS)
     subscribe.click()
 
+    # Just to wait a bit longer after last step
+    timeout = DEFAULT_TIMEOUT_MILLISECONDS + 100000
+
     # Using assertion to verify if subscription is success
-    expect(page.locator("xpath=//div[@aria-label='Email Form success']//div[1]", has_text="You're successfully subscribed!")).to_be_visible(timeout=DEFAULT_TIMEOUT_MILLISECONDS)
-    expect(page).to_have_url(f"{BASE_URL}/contact",timeout=DEFAULT_TIMEOUT_MILLISECONDS)
+    expect(page.locator("xpath=//div[@aria-label='Email Form success']//div[1]", has_text="You're successfully subscribed!")).to_be_visible(timeout=timeout)
+    expect(page).to_have_url(f"{BASE_URL}/contact",timeout=timeout)
