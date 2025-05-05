@@ -13,3 +13,4 @@ def test_e2e_validations(playwright:Playwright):
     page.get_by_placeholder("email@example.com").fill("hamsa@gmail.com")
     page.get_by_placeholder("enter your passsword").fill("Anitha@1972")
     page.get_by_role("button",name="Login").click()
+
