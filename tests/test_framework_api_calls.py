@@ -15,21 +15,16 @@ with open('credentials.json') as f:
 def test_e2e_validations(playwright:Playwright,user_credentials):
     userName=user_credentials["userEmail"]
     userPassword=user_credentials["userPassword"]
-
     browser=playwright.chromium.launch(headless=False)
     context=browser.new_context()
     page=context.new_page()
 
-
-  
-
     api_utils=APIUtils()
     orderID=api_utils.createOrder(playwright,user_credentials)
 
-
     loginpage= LoginPage(page) 
-    LoginPage.navigate() 
-    LoginPage.login(userName,userPassword)
+    loginpage.navigate() 
+    loginpage.login(userName,userPassword)
 
     dashboard=DashBoardPage(page)
     dashboard.selectOrdersNavLink()

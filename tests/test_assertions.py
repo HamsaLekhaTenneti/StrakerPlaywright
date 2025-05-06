@@ -1,27 +1,27 @@
 import time
 from playwright.sync_api import Page,expect
-
+from test_sample import BASE_URL
 
 def test_asssertionsvalidation(page:Page):
-    page.goto("https://rahulshettyacademy.com/AutomationPractice/")
+    page.goto(f"{BASE_URL}/AutomationPractice/")
     expect(page.get_by_placeholder("Hide/Show Example")).to_be_visible()
     page.get_by_role(role="button",name="Hide").click()
     expect(page.get_by_placeholder("Hide/Show Example")).to_be_hidden()
     
 def test_handlepopup(page:Page):
-    page.goto("https://rahulshettyacademy.com/AutomationPractice/")
+    page.goto("{BASE_URL}/AutomationPractice/")
     page.on("dialog",lambda x:x.accept())
     page.get_by_role("button",name="Confirm").click()
     time.sleep(5)
 
 def test_handlingframes(page:Page):
-     page.goto("https://rahulshettyacademy.com/AutomationPractice/")
+     page.goto("{BASE_URL}/AutomationPractice/")
      pageFrame=page.frame_locator("#courses-iframe")
      pageFrame.get_by_role("link",name="All Access plan").click()
      expect(pageFrame.locator("body")).to_contain_text("Happy Subscibers")
 
 def test_UIvalidations(page:Page):
-    page.goto("https://rahulshettyacademy.com/seleniumPractise/#/offers")
+    page.goto("{BASE_URL}/seleniumPractise/#/offers")
     for index in range(page.locator("th")).count():
         if page.locator("th").nth(index).filter(has_text="Price").count()>0:
             priceColvalue= index

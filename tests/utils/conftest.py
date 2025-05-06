@@ -1,20 +1,17 @@
 import pytest
-
-
+from apiBaseFramework import BASE_URL
 
 def pytest_addoption(parser):
     parser.addoption(
         "--browser_name", action="store", default="chrome", help="browser selection"
     )
     parser.addoption(
-        "--url_name", action="store", default="https://rahulshettyacademy.com/client", help="server selection"
+        "--url_name", action="store", default=f"{BASE_URL}/client", help="server selection"
     )
-
 
 @pytest.fixture(scope="session")
 def user_credentials(request):
     return request.param
-
 
 @pytest.fixture
 def browserInstance(playwright, request):

@@ -1,13 +1,10 @@
-import time
-
 from playwright.sync_api import Page, expect
-
+from test_sample import BASE_URL
 
 def test_UIChecks(page: Page):
 
-
     #hide/display and placeholder
-    page.goto("https://rahulshettyacademy.com/AutomationPractice/")
+    page.goto(f"{BASE_URL}/AutomationPractice/")
     expect(page.get_by_placeholder("Hide/Show Example")).to_be_visible()
     page.get_by_role("button", name="Hide").click()
     expect(page.get_by_placeholder("Hide/Show Example")).to_be_hidden()
@@ -16,12 +13,9 @@ def test_UIChecks(page: Page):
     page.on("dialog", lambda dialog:dialog.accept())
     page.get_by_role("button",name="Confirm").click()
 
-
     #MouseHover
     page.locator("#mousehover").hover()
     page.get_by_role("link",name="Top").click()
-
-
 
     #FrameHandling
     pageFrame = page.frame_locator("#courses-iframe")
@@ -32,11 +26,11 @@ def test_UIChecks(page: Page):
     #identify the price column
     #identify rice row
     # extract the price of the rice.
-    page.goto("https://rahulshettyacademy.com/seleniumPractise/#/offers")
+    page.goto(f"{BASE_URL}/seleniumPractise/#/offers")
 
     for index in range(page.locator("th").count()):
         if page.locator("th").nth(index).filter(has_text="Price").count()>0:
-            priceColValue = index;
+            priceColValue = index
             print(f"Price column value is {priceColValue} ")
             break
 
